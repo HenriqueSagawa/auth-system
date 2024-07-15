@@ -18,7 +18,7 @@ export default function RegisterPage() {
 
     const router = useRouter();
 
-    if(getUserData()) {
+    if (getUserData()) {
         router.push("/profile");
     }
 
@@ -50,9 +50,17 @@ export default function RegisterPage() {
         if (await getUser(data.username)) {
             alert("Usuário já existe");
         } else {
-            registerUser(data);
-            saveUserData(data);
-            router.push("/profile");
+            try {
+                const user: any = await registerUser(data);
+                saveUserData(data);
+                if (user) {
+                    router.push("/profile");
+
+                }
+            } catch (err) {
+                console.log(err);
+            }
+
         }
     };
 

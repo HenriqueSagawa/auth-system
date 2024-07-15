@@ -16,7 +16,7 @@ export function removeUserData() {
     localStorage.removeItem('userData');
 }
 
-function getStorageValue(key, defaultValue) {
+function getStorageValue(key: any, defaultValue: any) {
     // getting stored value
     if (typeof window !== "undefined") {
         const saved = localStorage.getItem(key);
