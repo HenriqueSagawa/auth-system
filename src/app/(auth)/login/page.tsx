@@ -11,8 +11,16 @@ import { useRouter } from 'next/navigation'
 import { findUser } from "@/services/login";
 import { getUserData } from "@/services/saveData"
 import { saveUserData } from "@/services/saveData";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 export default function LoginPage() {
+
+    const [isVisible, setIsVisible] = useState(false);
+
+    function handleVisibility() {
+        setIsVisible(!isVisible);
+    }
 
     const router = useRouter();
 
@@ -55,8 +63,12 @@ export default function LoginPage() {
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <h1 className="text-3xl font-semibold">Login</h1>
                 <Input register={register("username")} type="email" placeholder="Nome de usuário" />
-                <Input register={register("password")}  type="password" placeholder="Senha" />
-                <button className="w-full bg-cyan-700 py-3 rounded hover:opacity-90 active:opacity-80">Entrar</button>
+                <div className="cursor-pointer relative flex justify-between items-center w-full">
+                   <Input register={register("password")}  type={isVisible ? "text" : "password"} placeholder="Senha" />
+                   <span className="absolute right-3" onClick={handleVisibility}>{isVisible ? (<FaEye size={20} />) : (<FaEyeSlash size={20} />)}</span>
+                </div>
+                
+                <button className="w-full font-semibold bg-cyan-700 py-3 rounded hover:opacity-90 active:opacity-80">Entrar</button>
                 <p className="text-right text-sm text-slate-400 w-full">Não possui conta? <Link href="/register" className="text-blue-600">Cadastre-se</Link></p>
             </Form>
         </div>
