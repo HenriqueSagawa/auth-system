@@ -1,5 +1,5 @@
-export function Input({ type, placeholder }: any) {
+export function Input({ type, placeholder, register, className }: any) {
     return (
-        <input className="outline-none w-full rounded p-3 bg-slate-700" type={type} placeholder={placeholder} required/>
+        <input {...register}  className={`outline-none w-full rounded p-3 bg-slate-700 ${className}`} type={type} placeholder={placeholder}/>
     )
 }
